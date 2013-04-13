@@ -9,12 +9,12 @@
 // @icon           http://skratchdot.com/favicon.ico
 // @downloadURL    https://github.com/skratchdot/github-gh-pages-link.user.js/raw/master/github-gh-pages-link.user.js
 // @updateURL      https://github.com/skratchdot/github-gh-pages-link.user.js/raw/master/github-gh-pages-link.user.js
-// @version        1.0
+// @version        1.1
 // ==/UserScript==
 /*global jQuery, moment */
 /*jslint browser: true, plusplus: true */
 
-var userScript = function () {
+(function () {
 	'use strict';
 
 	// onDomReady : setup our page
@@ -43,9 +43,4 @@ var userScript = function () {
 			jQuery('#skratchdot-gh-pages-link-source').attr('href', ghPage.attr('href'));
 		}
 	});
-};
-
-// Inject our userScript script
-var script = document.createElement('script');
-script.textContent = '(' + userScript.toString() + ')();';
-document.body.appendChild(script);
+}());
