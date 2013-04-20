@@ -9,7 +9,7 @@
 // @icon           http://skratchdot.com/favicon.ico
 // @downloadURL    https://github.com/skratchdot/github-gh-pages-link.user.js/raw/master/github-gh-pages-link.user.js
 // @updateURL      https://github.com/skratchdot/github-gh-pages-link.user.js/raw/master/github-gh-pages-link.user.js
-// @version        1.1
+// @version        1.2
 // ==/UserScript==
 /*global jQuery, moment */
 /*jslint browser: true, plusplus: true */
@@ -30,7 +30,7 @@
 			if (ghPageLinkSplit.length !== 3) {
 				return;
 			}
-			ghPageLink = 'http://' + ghPageLinkSplit[1] + '.github.com/' + ghPageLinkSplit[2];
+			ghPageLink = 'http://' + ghPageLinkSplit[1] + '.github.io/' + ghPageLinkSplit[2];
 			// Add html
 			repoDescHomepage.append('<div style="margin-top:5px">' +
 				'<span style="padding-right:5px;"><b>gh-pages:</b></span>' +
