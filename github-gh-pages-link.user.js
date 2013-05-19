@@ -4,43 +4,28 @@
 // @description    If a repository has a gh-pages branch, then this will add links to the Github Page, as well as the gh-page source code.
 // @include        https://github.com/*
 // @match          https://github.com/*
+// @require        https://gist.github.com/skratchdot/5604120/raw/_init.js
+// @require        https://gist.github.com/skratchdot/5604120/raw/gh-pages-link.js
 // @run-at         document-end
 // @grant          none
 // @icon           http://skratchdot.com/favicon.ico
 // @downloadURL    https://github.com/skratchdot/github-gh-pages-link.user.js/raw/master/github-gh-pages-link.user.js
 // @updateURL      https://github.com/skratchdot/github-gh-pages-link.user.js/raw/master/github-gh-pages-link.user.js
-// @version        1.2
+// @version        1.3
 // ==/UserScript==
-/*global jQuery, moment */
-/*jslint browser: true, plusplus: true */
+/*global SKRATCHDOT, document */
 
-(function () {
-	'use strict';
+// This code is only going to run for browsers that don't support
+// the @require annotation when executing userscripts.
+if ('undefined' === typeof SKRATCHDOT) {
+	var addScript = function (src) {
+		'use strict';
+		var script = document.createElement('script');
+		script.src = src;
+		document.body.appendChild(script);
+		document.body.removeChild(script);
+	};
 
-	// onDomReady : setup our page
-	jQuery(document).ready(function () {
-		var repo = jQuery('a.js-current-repository:first'),
-			repoDescHomepage = jQuery('.repo-desc-homepage:first'),
-			ghPage = jQuery('.js-navigation-open[data-name="gh-pages"]:first'),
-			ghPageLink = repo.attr('href'),
-			ghPageLinkSplit;
-		if (repo.length && repoDescHomepage.length && ghPage.length && typeof ghPageLink === 'string') {
-			// Build gh-page link
-			ghPageLinkSplit = ghPageLink.split('/');
-			if (ghPageLinkSplit.length !== 3) {
-				return;
-			}
-			ghPageLink = 'http://' + ghPageLinkSplit[1] + '.github.io/' + ghPageLinkSplit[2];
-			// Add html
-			repoDescHomepage.append('<div style="margin-top:5px">' +
-				'<span style="padding-right:5px;"><b>gh-pages:</b></span>' +
-				'<span><a id="skratchdot-gh-pages-link" href="#"></a></span>' +
-				'<span>&nbsp;&#8226;&nbsp;</span>' +
-				'<span><a id="skratchdot-gh-pages-link-source" href="#">[gh-pages source]</a></span>' +
-				'</div>');
-			// Fix html
-			jQuery('#skratchdot-gh-pages-link').attr('href', ghPageLink).text(ghPageLink);
-			jQuery('#skratchdot-gh-pages-link-source').attr('href', ghPage.attr('href'));
-		}
-	});
-}());
+	// Required by: repo-filter-info
+	addScript('https://gist.github.com/skratchdot/5604120/raw/gh-pages-link.js');
+}
